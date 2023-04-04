@@ -20,7 +20,7 @@ use Steampixel\Route;
 define('ROUTE_URL_INDEX', rtrim($_ENV['AUTH0_BASE_URL'], '/'));
 define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '/login');
 define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback');
-define('ROUTER_URL_LOGOUT', ROUTE_URL_INDEX . '/logout');
+define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '/logout');
 
 Route::add('/', function() use ($auth0) {
 	$session = $auth0->getCredentials();
@@ -38,12 +38,12 @@ Route::add('/', function() use ($auth0) {
 
 	echo '<p>You can now <a href="/logout">log out</a>.</p>';
 
-	$emailAddress = isset($session->user['email']) ? $session->user['email'] : 'Unknown';
-	$backupName = isset($session->user['nickname']) ? $session->user['nickname'] : $emailAddress;
-	$name = isset($session-> user['name']) ? $session->user['name'] : $backupName; // @TODO use this somehow
+	// $emailAddress = isset($session->user['email']) ? $session->user['email'] : 'Unknown';
+	// $backupName = isset($session->user['nickname']) ? $session->user['nickname'] : $emailAddress;
+	// $name = isset($session-> user['name']) ? $session->user['name'] : $backupName; // @TODO use this somehow
 });
 
-	Route::add('/login', function() use($auth0) {
+	Route::add('/login', function() use ($auth0) {
 		// Reset the session to avoid "invalid state" errors
 		$auth0->clear();
 
@@ -69,8 +69,3 @@ Route::add('/', function() use ($auth0) {
 
 	Route::run('/');
 ?>
-<p>Hi 
-    <?php
-    echo 'Mark';
-    ?>
-</p>
